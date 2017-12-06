@@ -1,0 +1,12 @@
+<ng-container *ngIf="data && data.length">
+  <div class="select-input">
+    <mat-select class="select-input__select"
+                (selectionChange)="onChange($event.value)">
+      <ng-container *ngFor="let item of data">
+        <mat-option class="select-input__option"
+                    [value]="item.value"
+                    [innerHtml]="item.name"></mat-option>
+      </ng-container>
+    </mat-select>
+  </div>
+</ng-container>

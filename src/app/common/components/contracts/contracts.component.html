@@ -1,0 +1,12 @@
+<mat-tab-group class="demo-tab-group"
+               [selectedIndex]="currentStep"
+               (selectedIndexChange)="selectedIndexChange($event)">
+  <ng-container *ngFor="let step of steps">
+    <mat-tab [label]="step.label"
+             [disabled]="step.disabled">
+      <select-input [data]="step.data"
+                    [model]="step.model"
+                    (modelChange)="selectInputModelChange($event)"></select-input>
+    </mat-tab>
+  </ng-container>
+</mat-tab-group>
