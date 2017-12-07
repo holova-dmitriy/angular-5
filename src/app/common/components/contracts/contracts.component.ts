@@ -1,23 +1,22 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, ViewEncapsulation} from '@angular/core';
 import {Contract, ContractFields} from '../../interfaces/contract';
 import {ContractService} from '../../services/contract/contract.service';
-import ContractsSteps, {StepInterface} from './contracts-steps';
+import {ContractsSteps, StepInterface, StepViewType} from './contracts-steps';
 
 @Component({
   selector: 'contracts',
   templateUrl: './contracts.component.html',
   styleUrls: ['./contracts.component.scss'],
-  providers: [ContractsSteps]
+  encapsulation: ViewEncapsulation.None,
 })
 export class ContractsComponent implements OnInit {
   public contracts: ContractFields;
-  public contractKeyList: {[key: string]: string};
 
-  private _steps: StepInterface[] = this.contractsSteps.steps;
+  private _contractKeyList: {[key: string]: string} = {};
+  private _steps: StepInterface[] = (new ContractsSteps()).steps;
   private _previousContractData = {};
 
-  constructor(protected contractService: ContractService,
-              protected contractsSteps: ContractsSteps) {
+  constructor(protected contractService: ContractService) {
   }
 
   ngOnInit() {
@@ -49,6 +48,12 @@ export class ContractsComponent implements OnInit {
   }
 
   selectInputModelChange(value: string): void {
+    if (!value) {
+      return;
+    }
+
+    this._steps[this.currentStep].model = value;
+
     this.contractService.create({
       previous_data: Object.keys(this._previousContractData).length > 0 ? this._previousContractData : null,
       [this._steps[this.currentStep++].name]: value,
@@ -59,13 +64,29 @@ export class ContractsComponent implements OnInit {
         Object.keys(previousData)
           .forEach((item) => this._previousContractData[item] = previousData[item]);
 
-        this.refreshStep(contract);
-        this.contractKeyList = contract.contract_key;
+        this._contractKeyList = contract.contract_key;
+        setTimeout(() => this.refreshStep(contract));
       });
   }
 
   selectedIndexChange(selectedIndex: number): void {
     this.currentStep = selectedIndex;
-    this._steps.forEach((step: StepInterface, index: number) => step.disabled = index > selectedIndex);
+
+    this._steps.forEach((step: StepInterface, index: number) => {
+      step.disabled = index > selectedIndex;
+      step.model = '';
+    });
+  }
+
+  get stepViewType(): any {
+    return StepViewType;
+  }
+
+  get contractKeyList(): string[] {
+    return Object.keys(this._contractKeyList);
+  }
+
+  get contractList(): {} {
+    return this._contractKeyList;
   }
 }

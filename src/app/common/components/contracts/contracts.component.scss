@@ -1,7 +1,35 @@
-.demo-tab-group {
-  border: 1px solid #e8e8e8;
-}
+.contracts {
+  &__tab-group {
+    border: 1px solid #e8e8e8;
+  }
+  .mat-tab-labels {
+    width: 100%;
+    justify-content: center;
+  }
+  .mat-tab-label {
+    width: calc(100% / 3);
+  }
+  .mat-tab-body {
+    height: auto;
+    padding: 40px 15px;
+    min-height: 150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
-.demo-tab-content {
-  padding: 16px;
+    .mat-tab-body-content {
+      height: auto;
+    }
+  }
+  &__list {
+    &-item {
+      display: flex !important;
+      justify-content: center;
+    }
+  }
+  &__spinner {
+    position: absolute;
+    left: calc(50% - 50px);
+    top: calc(50% - 50px);
+  }
 }

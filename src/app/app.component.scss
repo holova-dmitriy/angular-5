@@ -1,7 +1,15 @@
 .app-container {
   display: flex;
   justify-content: center;
+  padding: 60px 0 0 0;
 
+  &__contracts {
+    width: 600px;
+
+    @media (max-width: 767px) {
+      width: 100%;
+    }
+  }
   &__spinner {
     display: flex;
     justify-content: center;
@@ -9,5 +17,9 @@
     position: absolute;
     left: calc(50% - 50px);
     top: calc(50% - 50px);
+  }
+
+  @media (max-width: 767px) {
+    padding: 30px 15px;
   }
 }

@@ -1,12 +1,44 @@
-<mat-tab-group class="demo-tab-group"
-               [selectedIndex]="currentStep"
-               (selectedIndexChange)="selectedIndexChange($event)">
-  <ng-container *ngFor="let step of steps">
-    <mat-tab [label]="step.label"
-             [disabled]="step.disabled">
-      <select-input [data]="step.data"
-                    [model]="step.model"
-                    (modelChange)="selectInputModelChange($event)"></select-input>
-    </mat-tab>
-  </ng-container>
-</mat-tab-group>
+<ng-template #spinner>
+  <spinner class="contracts__spinner" [isShow]="true"></spinner>
+</ng-template>
+
+<div class="contracts">
+  <mat-tab-group class="contracts__tab-group"
+                 [selectedIndex]="currentStep"
+                 (selectedIndexChange)="selectedIndexChange($event)">
+    <ng-container *ngFor="let step of steps">
+      <mat-tab class="contracts__tab"
+               [label]="step.label"
+               [disabled]="step.disabled">
+        <ng-container [ngSwitch]="step.viewType">
+          <ng-container *ngSwitchCase="stepViewType.SELECT_INPUT">
+            <ng-container *ngIf="step.data && step.data.length > 0; else spinner">
+              <select-input class="contracts__select-input"
+                            [data]="step.data"
+                            [placeholder]="step.placeholder"
+                            [model]="step.model"
+                            (modelChange)="selectInputModelChange($event)"></select-input>
+            </ng-container>
+          </ng-container>
+          <ng-container *ngSwitchCase="stepViewType.CARD_INFO">
+            <mat-card class="contracts__card-info">
+              <ng-container *ngIf="contractKeyList && contractKeyList.length > 0; else spinner">
+                <mat-list class="contracts__list"
+                          role="list">
+                  <ng-container *ngFor="let key of contractKeyList">
+                    <mat-list-item class="contracts__list-item"
+                                   role="listitem">
+                      <span [innerHtml]="key"></span>
+                      <span>:</span>
+                      <span [innerHtml]="contractList[key]"></span>
+                    </mat-list-item>
+                  </ng-container>
+                </mat-list>
+              </ng-container>
+            </mat-card>
+          </ng-container>
+        </ng-container>
+      </mat-tab>
+    </ng-container>
+  </mat-tab-group>
+</div>

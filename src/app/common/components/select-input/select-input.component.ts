@@ -1,4 +1,5 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
+import {FormControl} from '@angular/forms';
 
 export interface SelectInputDataInterface {
   value: string;
@@ -14,6 +15,9 @@ export interface SelectInputDataInterface {
 export class SelectInputComponent implements OnInit {
   @Input()
   public data: SelectInputDataInterface[];
+
+  @Input()
+  public placeholder: string = 'Favorite item';
 
   @Input()
   public model: string;

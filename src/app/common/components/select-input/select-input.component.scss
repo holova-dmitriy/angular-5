@@ -1,4 +1,10 @@
 .select-input {
+  display: flex;
+  justify-content: center;
+
+  &__form {
+    width: 300px;
+  }
   &__select {}
   &__option {}
 }

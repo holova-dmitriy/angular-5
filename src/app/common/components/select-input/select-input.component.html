@@ -1,12 +1,19 @@
-<ng-container *ngIf="data && data.length">
-  <div class="select-input">
+<div class="select-input">
+  <mat-form-field class="select-input__form"
+                  [hideRequiredMarker]="false"
+                  [floatLabel]="'auto'">
     <mat-select class="select-input__select"
-                (selectionChange)="onChange($event.value)">
+                [placeholder]="placeholder"
+                [value]="model"
+                (valueChange)="onChange($event)">
+      <ng-container *ngIf="model">
+        <mat-option class="select-input__option">--</mat-option>
+      </ng-container>
       <ng-container *ngFor="let item of data">
         <mat-option class="select-input__option"
                     [value]="item.value"
                     [innerHtml]="item.name"></mat-option>
       </ng-container>
     </mat-select>
-  </div>
-</ng-container>
+  </mat-form-field>
+</div>
