@@ -1,5 +1,7 @@
 <div class="select-input">
-  <div class="select-input__form">
+  <mat-form-field class="select-input__form"
+                  [hideRequiredMarker]="false"
+                  [floatLabel]="'auto'">
     <mat-select class="select-input__select"
                 [placeholder]="placeholder"
                 [value]="model"
@@ -13,5 +15,5 @@
                     [innerHtml]="item.name"></mat-option>
       </ng-container>
     </mat-select>
-  </div>
+  </mat-form-field>
 </div>

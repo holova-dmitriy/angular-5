@@ -74,6 +74,7 @@ export class ContractsComponent implements OnInit {
 
     this._steps.forEach((step: StepInterface, index: number) => {
       step.disabled = index > selectedIndex;
+      step.finished = index < selectedIndex;
       step.model = '';
     });
   }

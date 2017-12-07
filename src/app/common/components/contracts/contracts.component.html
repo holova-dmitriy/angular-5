@@ -12,7 +12,7 @@
                [disabled]="step.disabled">
         <ng-container [ngSwitch]="step.viewType">
           <ng-container *ngSwitchCase="stepViewType.SELECT_INPUT">
-            <ng-container *ngIf="step.data && step.data.length > 0; else spinner">
+            <ng-container *ngIf="!step.finished && (step.data && step.data.length > 0); else spinner">
               <select-input class="contracts__select-input"
                             [data]="step.data"
                             [placeholder]="step.placeholder"

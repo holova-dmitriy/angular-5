@@ -8,6 +8,7 @@ export interface StepInterface {
   name: string;
   placeholder?: string;
   viewType: string;
+  finished?: boolean;
 }
 
 export enum StepViewType {
@@ -26,7 +27,7 @@ export class ContractsSteps {
         model: '',
         name: '',
         placeholder: 'Favorite contract',
-        viewType: StepViewType.SELECT_INPUT
+        viewType: StepViewType.SELECT_INPUT,
       },
       {
         label: 'Step 2',

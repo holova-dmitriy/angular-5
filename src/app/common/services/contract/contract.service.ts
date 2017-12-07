@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {Observable} from 'rxjs/Observable';
 import {Contract} from '../../interfaces/contract';
@@ -8,7 +8,8 @@ export class ContractService {
   public step: number = 0;
   private _baseUrl = 'https://new.radw.co/api/v2/contract';
 
-  constructor(private _httpClient: HttpClient) {}
+  constructor(private _httpClient: HttpClient) {
+  }
 
   get url(): string {
     return `${this._baseUrl}/step/${this.step}`;

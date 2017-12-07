@@ -7,8 +7,8 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {ContractsComponent} from './components/contracts/contracts.component';
 import {MaterialModule} from './material.module';
 import {SelectInputComponent} from './components/select-input/select-input.component';
-import { SpinnerComponent } from './components/spinner/spinner.component';
-import { SafeHtmlPipe } from './pipes/safe-html/safe-html.pipe';
+import {SpinnerComponent} from './components/spinner/spinner.component';
+import {SafeHtmlPipe} from './pipes/safe-html/safe-html.pipe';
 
 @NgModule({
   imports: [
